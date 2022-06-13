@@ -7,7 +7,6 @@ val kotlinLoggingVersion = "2.0.4"
 plugins {
     id("org.springframework.boot") version "2.6.8"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    id("org.flywaydb.flyway") version "8.4.1"
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
     kotlin("plugin.jpa") version "1.6.21"
@@ -29,7 +28,6 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation( "org.flywaydb:flyway-core:7.7.0")
     implementation("org.springdoc:springdoc-openapi-ui:1.6.4")
     implementation("io.jsonwebtoken:jjwt:0.9.1")
     implementation("org.apache.logging.log4j:log4j-bom:$log4jVersion")
