@@ -1,1 +1,6 @@
-
+spring:
+  datasource:
+    url: jdbc:postgresql://db:5432/java_to_dev_app_db
+    username: postgres
+    password: nE5kMc7JCGNqwDQM
+    driverClassName: org.postgresql.Driver

@@ -1,11 +1,22 @@
 package com.unilasalle.helpdesk.extension
 
 import com.unilasalle.helpdesk.controller.request.TicketRegisterRequest
+import com.unilasalle.helpdesk.controller.request.UserRegisterRequest
+import com.unilasalle.helpdesk.controller.response.CategoryResponse
 import com.unilasalle.helpdesk.controller.response.TicketResponse
 import com.unilasalle.helpdesk.enums.TicketPriority
+import com.unilasalle.helpdesk.model.Category
 import com.unilasalle.helpdesk.model.Ticket
 import com.unilasalle.helpdesk.model.User
-import java.util.UUID
+
+
+
+fun Category.toCategoryResponse(): CategoryResponse {
+    return CategoryResponse(
+        id = this.id!!,
+        name = this.name
+    )
+}
 
 fun TicketRegisterRequest.toTicketEntity(applicant: User): Ticket {
     return Ticket(
@@ -26,5 +37,13 @@ fun Ticket.toTicketResponse(): TicketResponse {
         priority = this.priority,
         createdAt = this.createdAt,
         updatedAt = this.updatedAt
+    )
+}
+
+fun UserRegisterRequest.toUserEntity(): User {
+    return User(
+        name = this.name,
+        email = this.email,
+        password = this.password
     )
 }

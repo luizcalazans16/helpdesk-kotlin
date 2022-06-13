@@ -12,9 +12,13 @@ class UserService(
     private val passwordEncoder: BCryptPasswordEncoder,
     private val userRepository: UserRepository
 ) {
-    fun findById(applicantId: UUID): User {
-        return userRepository.findById(applicantId).orElseThrow {
-            NotFoundException("User $applicantId not found", "Not found")
+    fun findById(userId: UUID): User {
+        return userRepository.findById(userId).orElseThrow {
+            NotFoundException("User $userId not found", "Not found")
         }
+    }
+
+    fun registerUser(entity: User) {
+        userRepository.save(entity)
     }
 }
