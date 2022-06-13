@@ -19,6 +19,9 @@ class UserService(
     }
 
     fun registerUser(entity: User) {
-        userRepository.save(entity)
+        val userToSave = entity.copy(
+            password = passwordEncoder.encode(entity.password)
+        )
+        userRepository.save(userToSave)
     }
 }

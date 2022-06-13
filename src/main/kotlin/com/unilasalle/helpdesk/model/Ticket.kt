@@ -19,7 +19,7 @@ import javax.persistence.Table
 data class Ticket(
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     val id: UUID? = null,
 
     @Column

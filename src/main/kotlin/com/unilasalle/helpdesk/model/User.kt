@@ -1,19 +1,27 @@
 package com.unilasalle.helpdesk.model
 
+import com.unilasalle.helpdesk.enums.Roles
+import com.unilasalle.helpdesk.enums.UserStatus
 import java.util.UUID
+import javax.persistence.CollectionTable
 import javax.persistence.Column
+import javax.persistence.ElementCollection
 import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
+import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.JoinColumn
 import javax.persistence.Table
 
 @Entity(name = "user")
-@Table(name = "user")
+@Table(name = "users")
 data class User(
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     val id: UUID? = null,
 
     @Column
@@ -24,4 +32,22 @@ data class User(
 
     @Column
     val password: String,
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    val status: UserStatus,
+
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(
+        name = "user_roles",
+        joinColumns = [JoinColumn(name = "user_id")]
+    )
+    @ElementCollection(
+        targetClass = Roles::class,
+        fetch = FetchType.EAGER
+    )
+    val roles: Set<Roles> = setOf()
+
+
 )

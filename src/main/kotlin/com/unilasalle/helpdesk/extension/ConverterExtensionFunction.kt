@@ -5,6 +5,7 @@ import com.unilasalle.helpdesk.controller.request.UserRegisterRequest
 import com.unilasalle.helpdesk.controller.response.CategoryResponse
 import com.unilasalle.helpdesk.controller.response.TicketResponse
 import com.unilasalle.helpdesk.enums.TicketPriority
+import com.unilasalle.helpdesk.enums.UserStatus
 import com.unilasalle.helpdesk.model.Category
 import com.unilasalle.helpdesk.model.Ticket
 import com.unilasalle.helpdesk.model.User
@@ -44,6 +45,7 @@ fun UserRegisterRequest.toUserEntity(): User {
     return User(
         name = this.name,
         email = this.email,
-        password = this.password
+        password = this.password,
+        status = UserStatus.ACTIVE
     )
 }

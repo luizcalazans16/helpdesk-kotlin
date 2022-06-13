@@ -1,6 +1,16 @@
 spring:
   datasource:
-    url: jdbc:postgresql://db:5432/java_to_dev_app_db
+    url: jdbc:postgresql://localhost:5432/helpdesk-dores
     username: postgres
-    password: nE5kMc7JCGNqwDQM
+    password: postgres
     driverClassName: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+  flyway:
+    locations: classpath:db/migration
+  jackson:
+    default-property-inclusion: non_null
+jwt:
+  secret: 06eb9d7a-d9a2-4ea9-8d7c-2f4c54dc7363
+  expiration: 999999
