@@ -1,6 +1,7 @@
 package com.unilasalle.helpdesk.extension
 
 import com.unilasalle.helpdesk.controller.request.TicketRegisterRequest
+import com.unilasalle.helpdesk.controller.request.TicketUpdateRequest
 import com.unilasalle.helpdesk.controller.request.UserRegisterRequest
 import com.unilasalle.helpdesk.controller.request.UserUpdateRequest
 import com.unilasalle.helpdesk.controller.response.CategoryResponse
@@ -26,6 +27,18 @@ fun TicketRegisterRequest.toTicketEntity(applicant: User): Ticket {
         description = this.description,
         priority = TicketPriority.valueOf(this.priority),
         applicant = applicant
+    )
+}
+
+fun TicketUpdateRequest.toTicketEntity(previousValue: Ticket) : Ticket {
+    return Ticket(
+        id = previousValue.id,
+        title = previousValue.title,
+        description = this.description,
+        priority = previousValue.priority,
+        applicant = previousValue.applicant,
+        createdAt = previousValue.createdAt,
+        updatedAt = previousValue.updatedAt
     )
 }
 

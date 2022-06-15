@@ -47,6 +47,6 @@ class TicketController(
 
     @PutMapping("/{ticketId}")
     fun updateTicket(@PathVariable ticketId: UUID, @RequestBody updateRequest: TicketUpdateRequest) {
-
+        ticketService.update(ticketId, updateRequest)
     }
 }

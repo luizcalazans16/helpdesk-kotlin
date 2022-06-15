@@ -1,15 +1,19 @@
 package com.unilasalle.helpdesk.service
 
+import com.unilasalle.helpdesk.controller.request.TicketUpdateRequest
 import com.unilasalle.helpdesk.enums.Errors
 import com.unilasalle.helpdesk.exception.NotFoundException
+import com.unilasalle.helpdesk.extension.toTicketEntity
 import com.unilasalle.helpdesk.model.Ticket
 import com.unilasalle.helpdesk.repository.TicketRepository
 import mu.KLogging
 import org.springframework.stereotype.Service
-import java.util.*
+import java.util.UUID
+
 
 @Service
 class TicketService(
+    private val userService: UserService,
     private val ticketRepository: TicketRepository
 ) {
     companion object : KLogging()
@@ -29,11 +33,22 @@ class TicketService(
         ticketRepository.save(entity)
     }
 
-    fun update(ticketToBeSaved: Ticket) {
-        if (!ticketRepository.existsById(ticketToBeSaved.id!!)) {
-            throw NotFoundException(Errors.HD201.message.format(ticketToBeSaved.id), Errors.HD201.code)
-        }
-        ticketRepository.save(ticketToBeSaved)
+    fun update(ticketId: UUID, ticketToBeSaved: TicketUpdateRequest) {
+        val storedTicket = findById(ticketId)
+
+        ticketRepository.save(
+            ticketToBeSaved.toTicketEntity(storedTicket)
+        )
     }
 
+    fun registerAttendance(attendantId: UUID, ticketId: UUID) {
+        logger.info { "Registering attendance for ticket: [$ticketId] | attendant: [$attendantId]" }
+        val foundAttendant = userService.findById(attendantId)
+        val ticket = findById(ticketId)
+
+        val ticketToBeSaved = ticket.copy(
+            attendant = foundAttendant
+        )
+        ticketRepository.save(ticketToBeSaved)
+    }
 }

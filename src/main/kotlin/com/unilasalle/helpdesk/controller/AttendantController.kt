@@ -1,6 +1,7 @@
 package com.unilasalle.helpdesk.controller
 
 import com.unilasalle.helpdesk.service.AttendantService
+import com.unilasalle.helpdesk.service.TicketService
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -11,11 +12,11 @@ import java.util.UUID
 @RestController
 @RequestMapping("/api/v1/attendants")
 class AttendantController(
-    private val attendantService: AttendantService
+    private val ticketService: TicketService
 ) {
 
     @PostMapping("/{attendantId}/ticket/{ticketId}/")
     fun registerAttendance(@PathVariable attendantId: UUID, @PathVariable ticketId: UUID) {
-        attendantService.registerAttendance(attendantId, ticketId)
+        ticketService.registerAttendance(attendantId, ticketId)
     }
 }
