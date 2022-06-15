@@ -1,11 +1,12 @@
 package com.unilasalle.helpdesk.service
 
+import com.unilasalle.helpdesk.enums.Errors
+import com.unilasalle.helpdesk.exception.NotFoundException
 import com.unilasalle.helpdesk.model.Ticket
 import com.unilasalle.helpdesk.repository.TicketRepository
 import mu.KLogging
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.stereotype.Service
-import java.util.UUID
+import java.util.*
 
 @Service
 class TicketService(
@@ -19,7 +20,7 @@ class TicketService(
 
     fun findById(ticketId: UUID): Ticket {
         return ticketRepository.findById(ticketId).orElseThrow {
-            NotFoundException()
+            throw NotFoundException(Errors.HD201.message.format(ticketId), Errors.HD201.code)
         }
     }
 
@@ -29,6 +30,10 @@ class TicketService(
     }
 
     fun update(ticketToBeSaved: Ticket) {
+        if (!ticketRepository.existsById(ticketToBeSaved.id!!)) {
+            throw NotFoundException(Errors.HD201.message.format(ticketToBeSaved.id), Errors.HD201.code)
+        }
         ticketRepository.save(ticketToBeSaved)
     }
+
 }

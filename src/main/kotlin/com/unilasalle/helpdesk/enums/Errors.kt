@@ -5,5 +5,6 @@ enum class Errors(
     val message: String
 ) {
 
-    HD000("ML-000", "Access Denied"),
+    HD000("HD-000", "Access Denied"),
+    HD201("HD-201", "Ticket [%s] not found"),
 }

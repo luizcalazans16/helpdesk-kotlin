@@ -20,8 +20,6 @@ class AttendantService(
         val ticketToBeSaved = ticket.copy(
             attendant = foundAttendant
         )
-
         ticketService.update(ticketToBeSaved)
-
     }
 }

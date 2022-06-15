@@ -48,6 +48,4 @@ data class User(
         fetch = FetchType.EAGER
     )
     val roles: Set<Roles> = setOf()
-
-
 )

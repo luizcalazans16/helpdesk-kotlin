@@ -2,14 +2,15 @@ package com.unilasalle.helpdesk.extension
 
 import com.unilasalle.helpdesk.controller.request.TicketRegisterRequest
 import com.unilasalle.helpdesk.controller.request.UserRegisterRequest
+import com.unilasalle.helpdesk.controller.request.UserUpdateRequest
 import com.unilasalle.helpdesk.controller.response.CategoryResponse
 import com.unilasalle.helpdesk.controller.response.TicketResponse
+import com.unilasalle.helpdesk.controller.response.UserResponse
 import com.unilasalle.helpdesk.enums.TicketPriority
 import com.unilasalle.helpdesk.enums.UserStatus
 import com.unilasalle.helpdesk.model.Category
 import com.unilasalle.helpdesk.model.Ticket
 import com.unilasalle.helpdesk.model.User
-
 
 
 fun Category.toCategoryResponse(): CategoryResponse {
@@ -47,5 +48,26 @@ fun UserRegisterRequest.toUserEntity(): User {
         email = this.email,
         password = this.password,
         status = UserStatus.ACTIVE
+    )
+}
+
+
+fun User.toUserResponse(): UserResponse {
+    return UserResponse(
+        id = this.id,
+        name = this.name,
+        email = this.email,
+        status = this.status.name
+    )
+}
+
+
+fun UserUpdateRequest.toUserEntity(previousValue: User): User {
+    return User(
+        id = previousValue.id,
+        name = this.name,
+        email = this.email,
+        status = previousValue.status,
+        password = previousValue.password
     )
 }
