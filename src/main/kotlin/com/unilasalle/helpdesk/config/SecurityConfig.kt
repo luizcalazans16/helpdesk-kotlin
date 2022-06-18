@@ -8,6 +8,7 @@ import com.unilasalle.helpdesk.security.JwtUtil
 import com.unilasalle.helpdesk.service.UserDetailsCustomService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -32,8 +33,8 @@ class SecurityConfig(
 
     private val PUBLIC_MATCHERS = arrayOf<String>()
 
-    private val ADMIN_MATCHERS = arrayOf(
-        "/admin/**"
+    private val PUBLIC_POST_MATCHERS = arrayOf(
+        "/**/**/users"
     )
 
     override fun configure(auth: AuthenticationManagerBuilder) {
@@ -44,8 +45,8 @@ class SecurityConfig(
         http.cors().and().csrf().disable()
 
         http.authorizeRequests()
-            //.anyRequest().permitAll()
             .antMatchers(*PUBLIC_MATCHERS).permitAll()
+            .antMatchers(HttpMethod.POST, *PUBLIC_POST_MATCHERS).permitAll()
             .anyRequest().authenticated()
         http.addFilter(AuthenticationFilter(authenticationManager(), userRepository, jwtUtil))
         http.addFilter(AuthorizationFilter(authenticationManager(), userDetails, jwtUtil))

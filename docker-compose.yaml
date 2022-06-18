@@ -6,12 +6,12 @@ services:
       dockerfile: ./Dockerfile
       context: .
     ports:
-      - "8090:8090"
+      - "8080:8080"
     depends_on:
       db:
         condition: service_healthy
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/helpdesk-dores
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://local:5432/helpdesk-dores
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
