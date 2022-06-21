@@ -1,6 +1,5 @@
 package com.unilasalle.helpdesk.controller
 
-import com.unilasalle.helpdesk.service.AttendantService
 import com.unilasalle.helpdesk.service.TicketService
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping

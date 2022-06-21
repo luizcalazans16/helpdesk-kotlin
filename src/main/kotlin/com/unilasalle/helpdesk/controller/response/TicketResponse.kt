@@ -1,6 +1,6 @@
 package com.unilasalle.helpdesk.controller.response
 
-import com.unilasalle.helpdesk.enums.TicketPriority
+import com.unilasalle.helpdesk.model.Ticket.TicketPriority
 import java.time.LocalDateTime
 import java.util.UUID
 

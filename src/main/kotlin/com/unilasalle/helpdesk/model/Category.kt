@@ -1,5 +1,6 @@
 package com.unilasalle.helpdesk.model
 
+import java.util.UUID
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -12,8 +13,15 @@ import javax.persistence.Table
 data class Category(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null,
+    val id: UUID? = null,
 
     @Column
-    val name: String
-)
+    val name: String,
+
+    val status: CategoryStatus
+) {
+    enum class CategoryStatus {
+        ACTIVE,
+        INACTIVE
+    }
+}

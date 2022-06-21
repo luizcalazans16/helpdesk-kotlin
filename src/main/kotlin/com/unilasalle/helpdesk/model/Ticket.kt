@@ -1,6 +1,5 @@
 package com.unilasalle.helpdesk.model
 
-import com.unilasalle.helpdesk.enums.TicketPriority
 import java.time.LocalDateTime
 import java.util.UUID
 import javax.persistence.Column
@@ -44,4 +43,10 @@ data class Ticket(
 
     @Column(name = "updated_at")
     val updatedAt: LocalDateTime = LocalDateTime.now()
-)
+) {
+    enum class TicketPriority {
+        LOW,
+        MEDIUM,
+        HIGH
+    }
+}

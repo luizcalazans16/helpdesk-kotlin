@@ -1,5 +1,6 @@
 package com.unilasalle.helpdesk.config
 
+import com.unilasalle.helpdesk.model.User.UserRole
 import com.unilasalle.helpdesk.repository.UserRepository
 import com.unilasalle.helpdesk.security.AuthenticationFilter
 import com.unilasalle.helpdesk.security.AuthorizationFilter
@@ -37,6 +38,10 @@ class SecurityConfig(
         "/**/**/users"
     )
 
+    private val ADMIN_MATCHERS = arrayOf(
+        "/**/**/tickets"
+    )
+
     override fun configure(auth: AuthenticationManagerBuilder) {
         auth.userDetailsService(userDetails).passwordEncoder(BCryptPasswordEncoder())
     }
@@ -47,6 +52,7 @@ class SecurityConfig(
         http.authorizeRequests()
             .antMatchers(*PUBLIC_MATCHERS).permitAll()
             .antMatchers(HttpMethod.POST, *PUBLIC_POST_MATCHERS).permitAll()
+            .antMatchers(HttpMethod.GET, *ADMIN_MATCHERS).hasAuthority(UserRole.ADMIN.description)
             .anyRequest().authenticated()
         http.addFilter(AuthenticationFilter(authenticationManager(), userRepository, jwtUtil))
         http.addFilter(AuthorizationFilter(authenticationManager(), userDetails, jwtUtil))
@@ -67,6 +73,7 @@ class SecurityConfig(
         val config = CorsConfiguration()
         config.allowCredentials = true
         config.addAllowedOriginPattern("*")
+        config.allowedOrigins = listOf("*")
         config.addAllowedHeader("*")
         config.addAllowedMethod("*")
         source.registerCorsConfiguration("/**", config)
