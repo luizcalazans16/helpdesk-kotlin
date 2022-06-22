@@ -32,18 +32,15 @@ class TicketController(
     fun findById(@PathVariable ticketId: UUID): TicketResponse {
         return ticketService.findById(ticketId).toTicketResponse()
     }
-
     @GetMapping("/applicant/{applicantId}")
     fun findByApplicantId(@PathVariable applicantId: UUID): List<TicketResponse> {
         return ticketService.findByApplicantId(applicantId).map { it.toTicketResponse() }
     }
-
     @PostMapping
     fun registerTicket(@RequestBody request: TicketRegisterRequest) {
         logger.info { "Sending request [$request] to register ticket" }
         ticketService.register(request)
     }
-
     @PutMapping("/{ticketId}")
     fun updateTicket(@PathVariable ticketId: UUID, @RequestBody updateRequest: TicketUpdateRequest) {
         ticketService.update(ticketId, updateRequest)

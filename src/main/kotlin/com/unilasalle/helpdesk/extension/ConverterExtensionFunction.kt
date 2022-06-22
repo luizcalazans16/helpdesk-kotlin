@@ -55,7 +55,8 @@ fun Ticket.toTicketResponse(): TicketResponse {
         attendantId = this.attendant?.id,
         priority = this.priority,
         createdAt = this.createdAt,
-        updatedAt = this.updatedAt
+        updatedAt = this.updatedAt,
+        category = this.category.name
     )
 }
 

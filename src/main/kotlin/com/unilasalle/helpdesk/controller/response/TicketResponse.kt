@@ -12,5 +12,6 @@ data class TicketResponse(
     val applicantId: UUID,
     val attendantId: UUID? = null,
     val createdAt: LocalDateTime,
-    val updatedAt: LocalDateTime
+    val updatedAt: LocalDateTime,
+    val category: String
 )
