@@ -23,12 +23,13 @@ fun Category.toCategoryResponse(): CategoryResponse {
     )
 }
 
-fun TicketRegisterRequest.toTicketEntity(applicant: User): Ticket {
+fun TicketRegisterRequest.toTicketEntity(applicant: User, category: Category): Ticket {
     return Ticket(
         title = this.title,
         description = this.description,
         priority = TicketPriority.valueOf(this.priority),
-        applicant = applicant
+        applicant = applicant,
+        category = category
     )
 }
 
@@ -40,7 +41,8 @@ fun TicketUpdateRequest.toTicketEntity(previousValue: Ticket): Ticket {
         priority = previousValue.priority,
         applicant = previousValue.applicant,
         createdAt = previousValue.createdAt,
-        updatedAt = previousValue.updatedAt
+        updatedAt = previousValue.updatedAt,
+        category = previousValue.category
     )
 }
 

@@ -7,5 +7,5 @@ data class TicketRegisterRequest(
     val applicantId: UUID,
     val description: String,
     val priority: String,
-    val category: String
+    val categoryId: Int
 )

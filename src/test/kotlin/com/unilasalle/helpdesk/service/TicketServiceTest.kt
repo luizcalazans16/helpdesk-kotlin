@@ -24,9 +24,13 @@ class TicketServiceTest {
     @MockK
     private lateinit var userService: UserService
 
+    @MockK
+    private lateinit var categoryService: CategoryService
+
     @Test
     fun `should return a ticket`() {
         val mockTicket = TicketMockHelper.mockTicket()
+
         every {
             ticketRepository.findById(mockTicket.id!!)
         } returns Optional.of(mockTicket)

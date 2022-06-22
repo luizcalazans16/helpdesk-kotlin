@@ -7,4 +7,5 @@ import java.util.UUID
 
 @Repository
 interface TicketRepository : JpaRepository<Ticket, UUID> {
+    fun findByApplicantId(applicantId: UUID) : List<Ticket>
 }

@@ -11,6 +11,7 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
+import javax.persistence.OneToOne
 import javax.persistence.Table
 
 @Entity(name = "ticket")
@@ -33,6 +34,10 @@ data class Ticket(
     @ManyToOne
     @JoinColumn(name = "applicant_id")
     val applicant: User,
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    val category: Category,
 
     @ManyToOne
     @JoinColumn(name = "attendant_id")

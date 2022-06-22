@@ -31,16 +31,19 @@ class SecurityConfig(
     private val jwtUtil: JwtUtil,
     private val customEntryPoint: CustomAuthenticationEntryPoint
 ) : WebSecurityConfigurerAdapter() {
+    companion object {
+        private val PUBLIC_MATCHERS = arrayOf<String>()
 
-    private val PUBLIC_MATCHERS = arrayOf<String>()
-
-    private val PUBLIC_POST_MATCHERS = arrayOf(
-        "/**/**/users"
-    )
-
-    private val ADMIN_MATCHERS = arrayOf(
-        "/**/**/tickets"
-    )
+        private val PUBLIC_POST_MATCHERS = arrayOf(
+            "/**/**/users"
+        )
+        private val GET_ADMIN_MATCHERS = arrayOf(
+            "/**/**/tickets"
+        )
+        private val POST_ADMIN_MATCHERS = arrayOf(
+            "/**/**/categories"
+        )
+    }
 
     override fun configure(auth: AuthenticationManagerBuilder) {
         auth.userDetailsService(userDetails).passwordEncoder(BCryptPasswordEncoder())
@@ -52,7 +55,8 @@ class SecurityConfig(
         http.authorizeRequests()
             .antMatchers(*PUBLIC_MATCHERS).permitAll()
             .antMatchers(HttpMethod.POST, *PUBLIC_POST_MATCHERS).permitAll()
-            .antMatchers(HttpMethod.GET, *ADMIN_MATCHERS).hasAuthority(UserRole.ADMIN.description)
+            .antMatchers(HttpMethod.GET, *GET_ADMIN_MATCHERS).hasAuthority(UserRole.ADMIN.description)
+            .antMatchers(HttpMethod.POST, *Companion.POST_ADMIN_MATCHERS).hasAuthority(UserRole.ADMIN.description)
             .anyRequest().authenticated()
         http.addFilter(AuthenticationFilter(authenticationManager(), userRepository, jwtUtil))
         http.addFilter(AuthorizationFilter(authenticationManager(), userDetails, jwtUtil))
@@ -84,4 +88,6 @@ class SecurityConfig(
     fun bCryptPasswordEncoder(): BCryptPasswordEncoder {
         return BCryptPasswordEncoder()
     }
+
+
 }

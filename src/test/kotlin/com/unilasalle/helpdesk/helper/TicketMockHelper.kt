@@ -1,5 +1,6 @@
 package com.unilasalle.helpdesk.helper
 
+import com.unilasalle.helpdesk.model.Category
 import com.unilasalle.helpdesk.model.Ticket
 import com.unilasalle.helpdesk.model.User
 import java.time.LocalDateTime
@@ -21,6 +22,11 @@ object TicketMockHelper {
             password = "12345",
             roles = setOf(User.UserRole.USER),
             status = User.UserStatus.ACTIVE
+        ),
+        category = Category(
+            id = Int.MAX_VALUE,
+            name = "TESTE",
+            status = Category.CategoryStatus.ACTIVE
         )
     )
 

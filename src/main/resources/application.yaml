@@ -10,6 +10,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+      dialect: org.hibernate.dialect.PostgreSQL81Dialect
   jackson:
     default-property-inclusion: non_null
 jwt:
