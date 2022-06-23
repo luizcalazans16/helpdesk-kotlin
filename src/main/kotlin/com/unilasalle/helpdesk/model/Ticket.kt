@@ -51,8 +51,7 @@ data class Ticket(
 
     @OneToMany
     val attachments: Attachment
-)
-    val updatedAt: LocalDateTime = LocalDateTime.now()
+
 ) {
     enum class TicketPriority {
         LOW,
