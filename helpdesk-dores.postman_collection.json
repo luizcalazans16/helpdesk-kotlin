@@ -1,0 +1,316 @@
+{
+	"info": {
+		"_postman_id": "ca174ca4-7fe5-4c48-8811-3269e117646d",
+		"name": "helpdesk-dores",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19560762"
+	},
+	"item": [
+		{
+			"name": "tickets",
+			"item": [
+				{
+					"name": "findByApplicantId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZTIzZDk3Yi1mMzkyLTRmNmItYjcyZC1hMGFkMjdkNmNkMzgiLCJleHAiOjE2NTU5MzgzNDd9.CqK-DuJaN8ntCYTCC1Z2t74aWHRLWl_WKjZYyR0d10xU4ZR6kIrDg3DHuw3ULZR7Po6dbyAr6fBiZSoO0hvetA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/tickets/applicant/de23d97b-f392-4f6b-b72d-a0ad27d6cd38",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"tickets",
+								"applicant",
+								"de23d97b-f392-4f6b-b72d-a0ad27d6cd38"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findTicketbyId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4NjRiZGM3My1iNzUwLTQ5OGUtYmRhZS0xYThkZDUzNDk2NzciLCJleHAiOjE2NTU0NDExMDd9.ragsrnt5qHy4Ld-8o9CmM4Dh5mm1edFPAs1zLaSIPMw3amISlF7GgjUx-NC35_zrT6Pwie2i4YQe91jozFfN2w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/tickets?id=huXP1B8dOgY0RlvAF2vC",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"tickets"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "huXP1B8dOgY0RlvAF2vC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "registerTicket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZTIzZDk3Yi1mMzkyLTRmNmItYjcyZC1hMGFkMjdkNmNkMzgiLCJleHAiOjE2NTU5MzgzNDd9.CqK-DuJaN8ntCYTCC1Z2t74aWHRLWl_WKjZYyR0d10xU4ZR6kIrDg3DHuw3ULZR7Po6dbyAr6fBiZSoO0hvetA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Teste2\",\r\n    \"description\": \"Teste\",\r\n    \"applicantId\": \"de23d97b-f392-4f6b-b72d-a0ad27d6cd38\",\r\n    \"priority\": \"LOW\",\r\n    \"categoryId\": 1 \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/tickets",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/tickets",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "findUserById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0ZDllNTI0Mi0wY2VlLTQxY2UtYjhhNy1hNzYzNzNkM2NlY2UiLCJleHAiOjE2NTU2NTkyODV9.KWNv7LwL29Fn85Ap194waIyKDIoxO9aCW7v895UXaeqrGOlc8j5zL9ev1khZnLFL_BOGJ_jdfLZvnd7aSuDoUQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"teste@teste.com\",\r\n    \"name\": \"Luiz\",\r\n    \"password\": \"1234567\",\r\n    \"roles\": [\r\n        \"ADMIN\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categories",
+			"item": [
+				{
+					"name": "createCategory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZTIzZDk3Yi1mMzkyLTRmNmItYjcyZC1hMGFkMjdkNmNkMzgiLCJleHAiOjE2NTU5MzgzNDd9.CqK-DuJaN8ntCYTCC1Z2t74aWHRLWl_WKjZYyR0d10xU4ZR6kIrDg3DHuw3ULZR7Po6dbyAr6fBiZSoO0hvetA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"MANUTENCAO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/categories",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TOKEN",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"teste@teste.com\",\r\n    \"password\": \"1234567\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findAllCategories",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4NjRiZGM3My1iNzUwLTQ5OGUtYmRhZS0xYThkZDUzNDk2NzciLCJleHAiOjE2NTU0NDExMDd9.ragsrnt5qHy4Ld-8o9CmM4Dh5mm1edFPAs1zLaSIPMw3amISlF7GgjUx-NC35_zrT6Pwie2i4YQe91jozFfN2w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/categories",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

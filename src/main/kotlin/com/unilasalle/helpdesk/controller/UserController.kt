@@ -22,7 +22,6 @@ import java.util.UUID
 class UserController(
     private val userService: UserService
 ) {
-
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     fun findAll(): List<UserResponse> {

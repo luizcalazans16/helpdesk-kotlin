@@ -1,5 +1,6 @@
 package com.unilasalle.helpdesk.extension
 
+import com.unilasalle.helpdesk.controller.request.CategoryRegisterRequest
 import com.unilasalle.helpdesk.controller.request.TicketRegisterRequest
 import com.unilasalle.helpdesk.controller.request.TicketUpdateRequest
 import com.unilasalle.helpdesk.controller.request.UserRegisterRequest
@@ -7,11 +8,12 @@ import com.unilasalle.helpdesk.controller.request.UserUpdateRequest
 import com.unilasalle.helpdesk.controller.response.CategoryResponse
 import com.unilasalle.helpdesk.controller.response.TicketResponse
 import com.unilasalle.helpdesk.controller.response.UserResponse
-import com.unilasalle.helpdesk.enums.TicketPriority
-import com.unilasalle.helpdesk.enums.UserStatus
 import com.unilasalle.helpdesk.model.Category
+import com.unilasalle.helpdesk.model.Category.CategoryStatus
 import com.unilasalle.helpdesk.model.Ticket
+import com.unilasalle.helpdesk.model.Ticket.TicketPriority
 import com.unilasalle.helpdesk.model.User
+import com.unilasalle.helpdesk.model.User.UserStatus
 
 
 fun Category.toCategoryResponse(): CategoryResponse {
@@ -21,16 +23,17 @@ fun Category.toCategoryResponse(): CategoryResponse {
     )
 }
 
-fun TicketRegisterRequest.toTicketEntity(applicant: User): Ticket {
+fun TicketRegisterRequest.toTicketEntity(applicant: User, category: Category): Ticket {
     return Ticket(
         title = this.title,
         description = this.description,
         priority = TicketPriority.valueOf(this.priority),
-        applicant = applicant
+        applicant = applicant,
+        category = category
     )
 }
 
-fun TicketUpdateRequest.toTicketEntity(previousValue: Ticket) : Ticket {
+fun TicketUpdateRequest.toTicketEntity(previousValue: Ticket): Ticket {
     return Ticket(
         id = previousValue.id,
         title = previousValue.title,
@@ -38,7 +41,8 @@ fun TicketUpdateRequest.toTicketEntity(previousValue: Ticket) : Ticket {
         priority = previousValue.priority,
         applicant = previousValue.applicant,
         createdAt = previousValue.createdAt,
-        updatedAt = previousValue.updatedAt
+        updatedAt = previousValue.updatedAt,
+        category = previousValue.category
     )
 }
 
@@ -51,7 +55,8 @@ fun Ticket.toTicketResponse(): TicketResponse {
         attendantId = this.attendant?.id,
         priority = this.priority,
         createdAt = this.createdAt,
-        updatedAt = this.updatedAt
+        updatedAt = this.updatedAt,
+        category = this.category.name
     )
 }
 
@@ -60,7 +65,8 @@ fun UserRegisterRequest.toUserEntity(): User {
         name = this.name,
         email = this.email,
         password = this.password,
-        status = UserStatus.ACTIVE
+        status = UserStatus.ACTIVE,
+        roles = this.roles
     )
 }
 
@@ -80,7 +86,14 @@ fun UserUpdateRequest.toUserEntity(previousValue: User): User {
         id = previousValue.id,
         name = this.name,
         email = this.email,
-        status = previousValue.status,
+        status = this.status,
         password = previousValue.password
+    )
+}
+
+fun CategoryRegisterRequest.toCategoryRequest(): Category {
+    return Category(
+        name = this.name,
+        status = CategoryStatus.ACTIVE
     )
 }

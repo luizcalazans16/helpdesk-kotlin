@@ -1,6 +1,6 @@
 package com.unilasalle.helpdesk.security
 
-import com.unilasalle.helpdesk.enums.UserStatus
+import com.unilasalle.helpdesk.model.User.UserStatus
 import com.unilasalle.helpdesk.model.User
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
@@ -27,7 +27,6 @@ class UserCustomDetails(
     override fun isAccountNonExpired(): Boolean = true
     override fun isAccountNonLocked(): Boolean = true
     override fun isCredentialsNonExpired(): Boolean = true
-
     override fun isEnabled(): Boolean = user.status == UserStatus.ACTIVE
 
 

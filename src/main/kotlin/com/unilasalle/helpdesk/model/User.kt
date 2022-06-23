@@ -1,7 +1,5 @@
 package com.unilasalle.helpdesk.model
 
-import com.unilasalle.helpdesk.enums.Roles
-import com.unilasalle.helpdesk.enums.UserStatus
 import java.util.UUID
 import javax.persistence.CollectionTable
 import javax.persistence.Column
@@ -44,8 +42,18 @@ data class User(
         joinColumns = [JoinColumn(name = "user_id")]
     )
     @ElementCollection(
-        targetClass = Roles::class,
+        targetClass = UserRole::class,
         fetch = FetchType.EAGER
     )
-    val roles: Set<Roles> = setOf()
-)
+    val roles: Set<UserRole> = setOf()
+) {
+    enum class UserRole(val description: String) {
+        ADMIN("ROLE_ADMIN"),
+        USER("ROLE_USER")
+    }
+
+    enum class UserStatus {
+        ACTIVE,
+        INACTIVE
+    }
+}

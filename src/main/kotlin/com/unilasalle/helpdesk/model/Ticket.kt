@@ -1,9 +1,18 @@
 package com.unilasalle.helpdesk.model
 
-import com.unilasalle.helpdesk.enums.TicketPriority
 import java.time.LocalDateTime
 import java.util.UUID
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
+import javax.persistence.OneToOne
+import javax.persistence.Table
 
 @Entity(name = "ticket")
 @Table(name = "ticket")
@@ -27,6 +36,10 @@ data class Ticket(
     val applicant: User,
 
     @ManyToOne
+    @JoinColumn(name = "category_id")
+    val category: Category,
+
+    @ManyToOne
     @JoinColumn(name = "attendant_id")
     val attendant: User? = null,
 
@@ -39,3 +52,11 @@ data class Ticket(
     @OneToMany
     val attachments: Attachment
 )
+    val updatedAt: LocalDateTime = LocalDateTime.now()
+) {
+    enum class TicketPriority {
+        LOW,
+        MEDIUM,
+        HIGH
+    }
+}

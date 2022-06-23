@@ -1,10 +1,8 @@
 version: '3.8'
 services:
   api:
-    image: "helpdesk.jar"
-    build:
-      dockerfile: ./Dockerfile
-      context: .
+    image: "luizcalazans96/helpdesk-dores:latest"
+    container_name: helpdesk-dores-api
     ports:
       - "8080:8080"
     depends_on:
