@@ -11,7 +11,6 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
-import javax.persistence.OneToOne
 import javax.persistence.Table
 
 @Entity(name = "ticket")
@@ -30,6 +29,9 @@ data class Ticket(
 
     @Enumerated(EnumType.STRING)
     val priority: TicketPriority,
+
+    @Enumerated(EnumType.STRING)
+    val status: TicketStatus,
 
     @ManyToOne
     @JoinColumn(name = "applicant_id")
@@ -53,5 +55,11 @@ data class Ticket(
         LOW,
         MEDIUM,
         HIGH
+    }
+    enum class TicketStatus {
+        OPEN,
+        IN_PROGRESS,
+        CANCELLED,
+        CLOSED
     }
 }

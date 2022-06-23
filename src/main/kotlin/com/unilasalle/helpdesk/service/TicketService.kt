@@ -54,12 +54,23 @@ class TicketService(
         val ticket = findById(ticketId)
 
         val ticketToBeSaved = ticket.copy(
-            attendant = foundAttendant
+            attendant = foundAttendant,
+            status = Ticket.TicketStatus.IN_PROGRESS
         )
         ticketRepository.save(ticketToBeSaved)
     }
 
     fun findByApplicantId(applicantId: UUID): List<Ticket> {
         return ticketRepository.findByApplicantId(applicantId)
+    }
+
+    fun closeTicket(attendantId: UUID, ticketId: UUID) {
+        val ticket = findById(ticketId)
+
+        val ticketToBeSaved = ticket.copy(
+            status = Ticket.TicketStatus.CLOSED
+        )
+
+        ticketRepository.save(ticketToBeSaved)
     }
 }
