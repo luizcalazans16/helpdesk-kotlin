@@ -60,7 +60,8 @@ fun Ticket.toTicketResponse(): TicketResponse {
         priority = this.priority,
         createdAt = this.createdAt,
         updatedAt = this.updatedAt,
-        category = this.category.name
+        category = this.category.name,
+        status = this.status.name
     )
 }
 

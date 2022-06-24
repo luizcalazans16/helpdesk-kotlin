@@ -1,12 +1,14 @@
 package com.unilasalle.helpdesk.service
 
 import com.unilasalle.helpdesk.controller.request.TicketRegisterRequest
+import com.unilasalle.helpdesk.controller.request.TicketRequestFilter
 import com.unilasalle.helpdesk.controller.request.TicketUpdateRequest
 import com.unilasalle.helpdesk.enums.Errors
 import com.unilasalle.helpdesk.exception.NotFoundException
 import com.unilasalle.helpdesk.extension.toTicketEntity
 import com.unilasalle.helpdesk.model.Ticket
 import com.unilasalle.helpdesk.repository.TicketRepository
+import com.unilasalle.helpdesk.repository.custom.TicketSpecification
 import mu.KLogging
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -74,5 +76,10 @@ class TicketService(
         )
 
         ticketRepository.save(ticketToBeSaved)
+    }
+
+    fun findByFilter(ticketRequestFilter: TicketRequestFilter, pageable: Pageable): Page<Ticket> {
+        val spec = TicketSpecification(ticketRequestFilter)
+        return ticketRepository.findAll(spec, pageable)
     }
 }
