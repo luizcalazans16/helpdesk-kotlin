@@ -39,7 +39,8 @@ class AuthenticationFilter(
     ) {
 
         val id = (authResult.principal as UserCustomDetails).id
-        val jwtToken = jwtUtil.generateToken(id)
+        val authorities = authResult.authorities
+        val jwtToken = jwtUtil.generateToken(id, authorities)
         response.addHeader("Authorization", "Bearer $jwtToken")
     }
 

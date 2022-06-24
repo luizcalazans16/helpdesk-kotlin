@@ -16,7 +16,7 @@ import java.util.UUID
 class AttendantController(
     private val ticketService: TicketService
 ) {
-    @PostMapping("/{attendantId}/ticket/{ticketId}/")
+    @PostMapping("/{attendantId}/ticket/{ticketId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun registerAttendance(@PathVariable attendantId: UUID, @PathVariable ticketId: UUID) {
         ticketService.registerAttendance(attendantId, ticketId)

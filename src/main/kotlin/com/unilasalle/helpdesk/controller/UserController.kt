@@ -5,6 +5,7 @@ import com.unilasalle.helpdesk.controller.request.UserUpdateRequest
 import com.unilasalle.helpdesk.controller.response.UserResponse
 import com.unilasalle.helpdesk.extension.toUserEntity
 import com.unilasalle.helpdesk.extension.toUserResponse
+import com.unilasalle.helpdesk.security.UserCanOnlyAccessTheirOwnResource
 import com.unilasalle.helpdesk.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
@@ -29,6 +30,7 @@ class UserController(
     }
 
     @GetMapping("/{userId}")
+    @UserCanOnlyAccessTheirOwnResource
     @ResponseStatus(HttpStatus.OK)
     fun findById(@PathVariable userId: UUID): UserResponse {
         return userService.findById(userId).toUserResponse()

@@ -8,6 +8,8 @@ import com.unilasalle.helpdesk.extension.toTicketEntity
 import com.unilasalle.helpdesk.model.Ticket
 import com.unilasalle.helpdesk.repository.TicketRepository
 import mu.KLogging
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import java.util.UUID
 
@@ -20,8 +22,8 @@ class TicketService(
 ) {
     companion object : KLogging()
 
-    fun findAll(): List<Ticket> {
-        return ticketRepository.findAll().toList()
+    fun findAll(pageable: Pageable): Page<Ticket> {
+        return ticketRepository.findAll(pageable)
     }
 
     fun findById(ticketId: UUID): Ticket {

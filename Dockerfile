@@ -7,4 +7,4 @@ RUN gradle -g $BUILD_CACHE_PATH clean build -x test
 FROM azul/zulu-openjdk-alpine:11
 COPY --from=builder /home/gradle/src/build/libs/helpdesk-0.0.1-SNAPSHOT.jar helpdesk.jar
 EXPOSE 8080
-CMD ["java", "-jar", "helpdesk.jar"]
+CMD ["java", "-Dspring.profiles.active=dev", "-jar", "helpdesk.jar"]
