@@ -40,13 +40,17 @@ fun TicketUpdateRequest.toTicketEntity(previousValue: Ticket): Ticket {
     return Ticket(
         id = previousValue.id,
         title = previousValue.title,
-        description = this.description,
-        priority = previousValue.priority,
+        description = this.description ?: previousValue.description,
+        priority = this.priority ?: previousValue.priority,
         applicant = previousValue.applicant,
         createdAt = previousValue.createdAt,
         updatedAt = previousValue.updatedAt,
-        category = previousValue.category,
-        status = previousValue.status
+        category = Category(
+            name = this.category ?: previousValue.category.name,
+            status = previousValue.category.status
+        ),
+        status = previousValue.status,
+        response = this.response
     )
 }
 
@@ -61,7 +65,10 @@ fun Ticket.toTicketResponse(): TicketResponse {
         createdAt = this.createdAt,
         updatedAt = this.updatedAt,
         category = this.category.name,
-        status = this.status.name
+        status = this.status.name,
+        applicantName = this.applicant.name,
+        attendantName = this.attendant?.name,
+        response = this.response
     )
 }
 
