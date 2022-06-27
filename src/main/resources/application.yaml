@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/helpdesk-dores
+    url: jdbc:postgresql://localhost:6543/helpdesk-dores
     username: postgres
     password: postgres
     driverClassName: org.postgresql.Driver

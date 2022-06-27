@@ -44,7 +44,22 @@ class UserController(
 
     @PutMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @UserCanOnlyAccessTheirOwnResource
     fun update(@PathVariable userId: UUID, @RequestBody request: UserUpdateRequest) {
         userService.updateUser(userId, request)
+    }
+
+    @PutMapping("/{userId}/activate")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @UserCanOnlyAccessTheirOwnResource
+    fun activateUser(@PathVariable userId: UUID) {
+        userService.activateUser(userId)
+    }
+
+    @PutMapping("/{userId}/inactivate")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @UserCanOnlyAccessTheirOwnResource
+    fun inactivateUser(@PathVariable userId: UUID) {
+        userService.inactivateUser(userId)
     }
 }

@@ -91,7 +91,7 @@ fun UserUpdateRequest.toUserEntity(previousValue: User): User {
         id = previousValue.id,
         name = this.name,
         email = this.email,
-        status = this.status,
+        status = previousValue.status,
         password = previousValue.password
     )
 }

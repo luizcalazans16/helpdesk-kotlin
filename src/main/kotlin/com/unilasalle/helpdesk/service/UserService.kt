@@ -42,9 +42,27 @@ class UserService(
     fun updateUser(userId: UUID, entity: UserUpdateRequest) {
         var user = findById(userId)
         user = entity.toUserEntity(user)
-        if(userRepository.existsById(userId)) {
-            throw NotFoundException(Errors.HD000.message.format(userId), Errors.HD000.code)
+        if(!userRepository.existsById(userId)) {
+            throw NotFoundException(Errors.HD202.message.format(userId), Errors.HD000.code)
         }
         userRepository.save(user)
+    }
+
+    fun activateUser(userId: UUID) {
+        val storedUser = findById(userId)
+
+        val userToBeSaved = storedUser.copy(
+            status = User.UserStatus.ACTIVE
+        )
+        userRepository.save(userToBeSaved)
+    }
+
+    fun inactivateUser(userId: UUID) {
+        val storedUser = findById(userId)
+
+        val userToBeSaved = storedUser.copy(
+            status = User.UserStatus.INACTIVE
+        )
+        userRepository.save(userToBeSaved)
     }
 }
