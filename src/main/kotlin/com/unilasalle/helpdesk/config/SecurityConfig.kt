@@ -24,7 +24,7 @@ import org.springframework.web.filter.CorsFilter
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 class SecurityConfig(
     private val userRepository: UserRepository,
     private val userDetails: UserDetailsCustomService,
@@ -43,6 +43,10 @@ class SecurityConfig(
         private val POST_ADMIN_MATCHERS = arrayOf(
             "/**/**/categories"
         )
+        private val PUT_ADMIN_MATCHERS = arrayOf(
+            "/**/**/user/**/activate",
+            "/**/**/user/**/inactivate"
+        )
     }
 
     override fun configure(auth: AuthenticationManagerBuilder) {
@@ -56,7 +60,8 @@ class SecurityConfig(
             .antMatchers(*PUBLIC_MATCHERS).permitAll()
             .antMatchers(HttpMethod.POST, *PUBLIC_POST_MATCHERS).permitAll()
             .antMatchers(HttpMethod.GET, *GET_ADMIN_MATCHERS).hasAuthority(UserRole.ADMIN.description)
-            .antMatchers(HttpMethod.POST, *Companion.POST_ADMIN_MATCHERS).hasAuthority(UserRole.ADMIN.description)
+            .antMatchers(HttpMethod.POST, *POST_ADMIN_MATCHERS).hasAuthority(UserRole.ADMIN.description)
+            .antMatchers(HttpMethod.PUT, *PUT_ADMIN_MATCHERS).hasAuthority(UserRole.ADMIN.description)
             .anyRequest().authenticated()
         http.addFilter(AuthenticationFilter(authenticationManager(), userRepository, jwtUtil))
         http.addFilter(AuthorizationFilter(authenticationManager(), userDetails, jwtUtil))
@@ -88,6 +93,4 @@ class SecurityConfig(
     fun bCryptPasswordEncoder(): BCryptPasswordEncoder {
         return BCryptPasswordEncoder()
     }
-
-
 }

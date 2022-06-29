@@ -6,6 +6,7 @@ import com.unilasalle.helpdesk.controller.request.TicketUpdateRequest
 import com.unilasalle.helpdesk.controller.request.UserRegisterRequest
 import com.unilasalle.helpdesk.controller.request.UserUpdateRequest
 import com.unilasalle.helpdesk.controller.response.CategoryResponse
+import com.unilasalle.helpdesk.controller.response.PageResponse
 import com.unilasalle.helpdesk.controller.response.TicketResponse
 import com.unilasalle.helpdesk.controller.response.UserResponse
 import com.unilasalle.helpdesk.model.Category
@@ -14,6 +15,7 @@ import com.unilasalle.helpdesk.model.Ticket
 import com.unilasalle.helpdesk.model.Ticket.TicketPriority
 import com.unilasalle.helpdesk.model.User
 import com.unilasalle.helpdesk.model.User.UserStatus
+import org.springframework.data.domain.Page
 
 
 fun Category.toCategoryResponse(): CategoryResponse {
@@ -29,7 +31,8 @@ fun TicketRegisterRequest.toTicketEntity(applicant: User, category: Category): T
         description = this.description,
         priority = TicketPriority.valueOf(this.priority),
         applicant = applicant,
-        category = category
+        category = category,
+        status = Ticket.TicketStatus.OPEN
     )
 }
 
@@ -37,12 +40,17 @@ fun TicketUpdateRequest.toTicketEntity(previousValue: Ticket): Ticket {
     return Ticket(
         id = previousValue.id,
         title = previousValue.title,
-        description = this.description,
-        priority = previousValue.priority,
+        description = this.description ?: previousValue.description,
+        priority = this.priority ?: previousValue.priority,
         applicant = previousValue.applicant,
         createdAt = previousValue.createdAt,
         updatedAt = previousValue.updatedAt,
-        category = previousValue.category
+        category = Category(
+            name = this.category ?: previousValue.category.name,
+            status = previousValue.category.status
+        ),
+        status = previousValue.status,
+        response = this.response
     )
 }
 
@@ -56,7 +64,11 @@ fun Ticket.toTicketResponse(): TicketResponse {
         priority = this.priority,
         createdAt = this.createdAt,
         updatedAt = this.updatedAt,
-        category = this.category.name
+        category = this.category.name,
+        status = this.status.name,
+        applicantName = this.applicant.name,
+        attendantName = this.attendant?.name,
+        response = this.response
     )
 }
 
@@ -86,7 +98,7 @@ fun UserUpdateRequest.toUserEntity(previousValue: User): User {
         id = previousValue.id,
         name = this.name,
         email = this.email,
-        status = this.status,
+        status = previousValue.status,
         password = previousValue.password
     )
 }
@@ -95,5 +107,14 @@ fun CategoryRegisterRequest.toCategoryRequest(): Category {
     return Category(
         name = this.name,
         status = CategoryStatus.ACTIVE
+    )
+}
+
+fun <T> Page<T>.toPageResponse(): PageResponse<T> {
+    return PageResponse(
+        this.content,
+        this.number,
+        this.totalElements,
+        this.totalPages
     )
 }

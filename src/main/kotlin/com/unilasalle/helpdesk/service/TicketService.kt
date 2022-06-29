@@ -1,13 +1,17 @@
 package com.unilasalle.helpdesk.service
 
 import com.unilasalle.helpdesk.controller.request.TicketRegisterRequest
+import com.unilasalle.helpdesk.controller.request.TicketRequestFilter
 import com.unilasalle.helpdesk.controller.request.TicketUpdateRequest
 import com.unilasalle.helpdesk.enums.Errors
 import com.unilasalle.helpdesk.exception.NotFoundException
 import com.unilasalle.helpdesk.extension.toTicketEntity
 import com.unilasalle.helpdesk.model.Ticket
 import com.unilasalle.helpdesk.repository.TicketRepository
+import com.unilasalle.helpdesk.repository.custom.TicketSpecification
 import mu.KLogging
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import java.util.UUID
 
@@ -20,8 +24,8 @@ class TicketService(
 ) {
     companion object : KLogging()
 
-    fun findAll(): List<Ticket> {
-        return ticketRepository.findAll().toList()
+    fun findAll(pageable: Pageable): Page<Ticket> {
+        return ticketRepository.findAll(pageable)
     }
 
     fun findById(ticketId: UUID): Ticket {
@@ -54,12 +58,28 @@ class TicketService(
         val ticket = findById(ticketId)
 
         val ticketToBeSaved = ticket.copy(
-            attendant = foundAttendant
+            attendant = foundAttendant,
+            status = Ticket.TicketStatus.IN_PROGRESS
         )
         ticketRepository.save(ticketToBeSaved)
     }
 
     fun findByApplicantId(applicantId: UUID): List<Ticket> {
         return ticketRepository.findByApplicantId(applicantId)
+    }
+
+    fun closeTicket(attendantId: UUID, ticketId: UUID) {
+        val ticket = findById(ticketId)
+
+        val ticketToBeSaved = ticket.copy(
+            status = Ticket.TicketStatus.CLOSED
+        )
+
+        ticketRepository.save(ticketToBeSaved)
+    }
+
+    fun findByFilter(ticketRequestFilter: TicketRequestFilter, pageable: Pageable): Page<Ticket> {
+        val spec = TicketSpecification(ticketRequestFilter)
+        return ticketRepository.findAll(spec, pageable)
     }
 }

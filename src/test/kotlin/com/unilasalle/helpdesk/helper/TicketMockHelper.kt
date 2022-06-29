@@ -27,7 +27,8 @@ object TicketMockHelper {
             id = Int.MAX_VALUE,
             name = "TESTE",
             status = Category.CategoryStatus.ACTIVE
-        )
+        ),
+        status = Ticket.TicketStatus.OPEN
     )
 
 }

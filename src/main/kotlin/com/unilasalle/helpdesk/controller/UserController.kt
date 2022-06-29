@@ -5,8 +5,11 @@ import com.unilasalle.helpdesk.controller.request.UserUpdateRequest
 import com.unilasalle.helpdesk.controller.response.UserResponse
 import com.unilasalle.helpdesk.extension.toUserEntity
 import com.unilasalle.helpdesk.extension.toUserResponse
+import com.unilasalle.helpdesk.security.UserCanOnlyAccessTheirOwnResource
 import com.unilasalle.helpdesk.service.UserService
 import org.springframework.http.HttpStatus
+import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -29,6 +32,7 @@ class UserController(
     }
 
     @GetMapping("/{userId}")
+    @UserCanOnlyAccessTheirOwnResource
     @ResponseStatus(HttpStatus.OK)
     fun findById(@PathVariable userId: UUID): UserResponse {
         return userService.findById(userId).toUserResponse()
@@ -42,7 +46,22 @@ class UserController(
 
     @PutMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @UserCanOnlyAccessTheirOwnResource
     fun update(@PathVariable userId: UUID, @RequestBody request: UserUpdateRequest) {
         userService.updateUser(userId, request)
+    }
+
+    @PutMapping("/{userId}/activate")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @UserCanOnlyAccessTheirOwnResource
+    fun activateUser(@PathVariable userId: UUID) {
+        userService.activateUser(userId)
+    }
+
+    @DeleteMapping("/{userId}/inactivate")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    fun inactivateUser(@PathVariable userId: UUID) {
+        userService.inactivateUser(userId)
     }
 }

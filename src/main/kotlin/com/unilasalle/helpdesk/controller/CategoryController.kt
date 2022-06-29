@@ -21,7 +21,6 @@ class CategoryController(
     fun findAll(): List<CategoryResponse> {
         return categoryService.findAll().map { it.toCategoryResponse() }
     }
-
     @PostMapping
     fun registerCategory(@RequestBody request: CategoryRegisterRequest) {
         return categoryService.register(request.toCategoryRequest())

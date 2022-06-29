@@ -10,8 +10,12 @@ data class TicketResponse(
     val description: String,
     val priority: TicketPriority,
     val applicantId: UUID,
+    val applicantName: String,
     val attendantId: UUID? = null,
+    val attendantName: String? = null,
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime,
-    val category: String
+    val category: String,
+    val status: String,
+    val response: String? = null
 )

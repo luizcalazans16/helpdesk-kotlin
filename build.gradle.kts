@@ -1,11 +1,7 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
-
 val log4jVersion = "2.16.0"
 val kotlinLoggingVersion = "2.0.4"
 val mockkVersion = "1.12.4"
 val kotlinTestVersion = "1.6.0"
-
 
 
 plugins {

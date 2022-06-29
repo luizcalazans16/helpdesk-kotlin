@@ -1,0 +1,9 @@
+INSERT INTO categories (id, name, status) values (1, 'MANUTENCAO', 'ACTIVE');
+INSERT INTO categories (id, name, status) values (2, 'IMPRESSORA', 'ACTIVE');
+INSERT INTO categories (id, name, status) values (3, 'AUDIO', 'ACTIVE');
+INSERT INTO categories (id, name, status) values (4, 'TELEFONIA', 'ACTIVE');
+INSERT INTO categories (id, name, status) values (5, 'SISTEMAS', 'ACTIVE');
+INSERT INTO categories (id, name, status) values (6, 'INSTALACAO_SOFTWARE', 'ACTIVE');
+INSERT INTO categories (id, name, status) values (7, 'EMAIL', 'ACTIVE');
+INSERT INTO categories (id, name, status) values (8, 'SUPORTE_USUARIO', 'ACTIVE');
+INSERT INTO categories (id, name, status) values (9, 'REDE', 'ACTIVE');
