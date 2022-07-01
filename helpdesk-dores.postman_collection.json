@@ -11,21 +11,35 @@
 			"item": [
 				{
 					"name": "findByApplicantId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZTIzZDk3Yi1mMzkyLTRmNmItYjcyZC1hMGFkMjdkNmNkMzgiLCJleHAiOjE2NTU5MzgzNDd9.CqK-DuJaN8ntCYTCC1Z2t74aWHRLWl_WKjZYyR0d10xU4ZR6kIrDg3DHuw3ULZR7Po6dbyAr6fBiZSoO0hvetA",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlMzE0NTc4Zi0xMTg3LTQxMmQtYjg0Zi1lYThmZTU1YTk2YmYiLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiZXhwIjoxNjU2MzczMjU3fQ.6BDrL_n7BN7yNQUHM_BVnPm_JB3Y9CQuJrRTaLSsVcLGga3XXvawHJd8SgrlpaJ5NmEAmYuUX78Q_DiH8UGEgw",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
 						"url": {
-							"raw": "localhost:8080/api/v1/tickets/applicant/de23d97b-f392-4f6b-b72d-a0ad27d6cd38",
+							"raw": "localhost:8080/api/v1/tickets/applicant/24cdb418-aa96-4d8e-b8c2-9edfb4951402?image",
 							"host": [
 								"localhost"
 							],
@@ -35,7 +49,13 @@
 								"v1",
 								"tickets",
 								"applicant",
-								"de23d97b-f392-4f6b-b72d-a0ad27d6cd38"
+								"24cdb418-aa96-4d8e-b8c2-9edfb4951402"
+							],
+							"query": [
+								{
+									"key": "image",
+									"value": null
+								}
 							]
 						}
 					},
@@ -49,7 +69,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4NjRiZGM3My1iNzUwLTQ5OGUtYmRhZS0xYThkZDUzNDk2NzciLCJleHAiOjE2NTU0NDExMDd9.ragsrnt5qHy4Ld-8o9CmM4Dh5mm1edFPAs1zLaSIPMw3amISlF7GgjUx-NC35_zrT6Pwie2i4YQe91jozFfN2w",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlMzE0NTc4Zi0xMTg3LTQxMmQtYjg0Zi1lYThmZTU1YTk2YmYiLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiZXhwIjoxNjU2NjM2NzE1fQ.zFQ8IsQtPo6wnOeeOexRiPhLTB8Qp3-W5Hl_vwvELtVArLw8bZT2AlKkXQRfjAvErMAkS40SJbBo8KTYa6d8gA",
 									"type": "string"
 								}
 							]
@@ -57,7 +77,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/tickets?id=huXP1B8dOgY0RlvAF2vC",
+							"raw": "localhost:8080/api/v1/tickets/4be68b82-4a32-4c09-a2c4-7437507fb83b",
 							"host": [
 								"localhost"
 							],
@@ -65,13 +85,8 @@
 							"path": [
 								"api",
 								"v1",
-								"tickets"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "huXP1B8dOgY0RlvAF2vC"
-								}
+								"tickets",
+								"4be68b82-4a32-4c09-a2c4-7437507fb83b"
 							]
 						}
 					},
@@ -85,7 +100,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZTIzZDk3Yi1mMzkyLTRmNmItYjcyZC1hMGFkMjdkNmNkMzgiLCJleHAiOjE2NTU5MzgzNDd9.CqK-DuJaN8ntCYTCC1Z2t74aWHRLWl_WKjZYyR0d10xU4ZR6kIrDg3DHuw3ULZR7Po6dbyAr6fBiZSoO0hvetA",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlMzE0NTc4Zi0xMTg3LTQxMmQtYjg0Zi1lYThmZTU1YTk2YmYiLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiZXhwIjoxNjU2NjM1Mzk2fQ.fhZi5i45V2JxIC__JKoVRmkaMsjV-UZ7zGtKRD-9aFZfRYkUBsAVH-jz-pAyDUQVPlk6PUwLbAk5I50_YxK0Eg",
 									"type": "string"
 								}
 							]
@@ -93,13 +108,39 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Teste2\",\r\n    \"description\": \"Teste\",\r\n    \"applicantId\": \"de23d97b-f392-4f6b-b72d-a0ad27d6cd38\",\r\n    \"priority\": \"LOW\",\r\n    \"categoryId\": 1 \r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "attachment",
+									"type": "file",
+									"src": "/C:/Users/luiz.calazans/Downloads/DestacadaBlog_16.png"
+								},
+								{
+									"key": "title",
+									"value": "Teste3",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Teste",
+									"type": "text"
+								},
+								{
+									"key": "applicantId",
+									"value": "24cdb418-aa96-4d8e-b8c2-9edfb4951402",
+									"type": "text"
+								},
+								{
+									"key": "priority",
+									"value": "LOW",
+									"type": "text"
+								},
+								{
+									"key": "categoryId",
+									"value": "1",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "localhost:8080/api/v1/tickets",
@@ -111,18 +152,35 @@
 								"api",
 								"v1",
 								"tickets"
+							],
+							"query": [
+								{
+									"key": "attachment",
+									"value": "",
+									"disabled": true
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "findAll",
+					"name": "findByFilter",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkZTIzZDk3Yi1mMzkyLTRmNmItYjcyZC1hMGFkMjdkNmNkMzgiLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiZXhwIjoxNjU2MDg5MzkyfQ.Ose6ZmdA0QaVRezNkk-UrRAfeVlPUW_pYRDc2OniPU7XQ57G-4t8WipptaK1DdAKUbHD9_djasPw3FhNU11dBQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/tickets",
+							"raw": "localhost:8080/api/v1/tickets/filter?status=OPEN",
 							"host": [
 								"localhost"
 							],
@@ -130,7 +188,14 @@
 							"path": [
 								"api",
 								"v1",
-								"tickets"
+								"tickets",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "OPEN"
+								}
 							]
 						}
 					},
@@ -178,7 +243,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"teste@teste.com\",\r\n    \"name\": \"Luiz\",\r\n    \"password\": \"1234567\",\r\n    \"roles\": [\r\n        \"ADMIN\"\r\n    ]\r\n}",
+							"raw": "{\r\n    \"email\": \"teste3@teste.com\",\r\n    \"name\": \"Luiz2\",\r\n    \"password\": \"12345678\",\r\n    \"roles\": [\r\n        \"ADMIN\"\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -247,6 +312,44 @@
 			]
 		},
 		{
+			"name": "attendant",
+			"item": [
+				{
+					"name": "registerAttendance",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlMzE0NTc4Zi0xMTg3LTQxMmQtYjg0Zi1lYThmZTU1YTk2YmYiLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiZXhwIjoxNjU2MzczMjU3fQ.6BDrL_n7BN7yNQUHM_BVnPm_JB3Y9CQuJrRTaLSsVcLGga3XXvawHJd8SgrlpaJ5NmEAmYuUX78Q_DiH8UGEgw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/attendants/e314578f-1187-412d-b84f-ea8fe55a96bf/ticket/41e72555-29f4-4fcc-80d8-323b938fa513",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"attendants",
+								"e314578f-1187-412d-b84f-ea8fe55a96bf",
+								"ticket",
+								"41e72555-29f4-4fcc-80d8-323b938fa513"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "TOKEN",
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {
@@ -267,7 +370,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"teste@teste.com\",\r\n    \"password\": \"1234567\"\r\n}"
+					"raw": "{\r\n    \"email\": \"teste3@teste.com\",\r\n    \"password\": \"12345678\"\r\n}"
 				},
 				"url": {
 					"raw": "localhost:8080/login",

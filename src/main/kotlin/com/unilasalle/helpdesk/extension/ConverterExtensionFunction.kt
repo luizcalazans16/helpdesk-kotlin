@@ -5,6 +5,7 @@ import com.unilasalle.helpdesk.controller.request.TicketRegisterRequest
 import com.unilasalle.helpdesk.controller.request.TicketUpdateRequest
 import com.unilasalle.helpdesk.controller.request.UserRegisterRequest
 import com.unilasalle.helpdesk.controller.request.UserUpdateRequest
+import com.unilasalle.helpdesk.controller.response.AttachmentResponse
 import com.unilasalle.helpdesk.controller.response.CategoryResponse
 import com.unilasalle.helpdesk.controller.response.PageResponse
 import com.unilasalle.helpdesk.controller.response.TicketResponse
@@ -16,6 +17,7 @@ import com.unilasalle.helpdesk.model.Ticket.TicketPriority
 import com.unilasalle.helpdesk.model.User
 import com.unilasalle.helpdesk.model.User.UserStatus
 import org.springframework.data.domain.Page
+import org.springframework.util.Base64Utils
 
 
 fun Category.toCategoryResponse(): CategoryResponse {
@@ -25,7 +27,10 @@ fun Category.toCategoryResponse(): CategoryResponse {
     )
 }
 
-fun TicketRegisterRequest.toTicketEntity(applicant: User, category: Category): Ticket {
+fun TicketRegisterRequest.toTicketEntity(
+    applicant: User,
+    category: Category
+): Ticket {
     return Ticket(
         title = this.title,
         description = this.description,
@@ -68,7 +73,13 @@ fun Ticket.toTicketResponse(): TicketResponse {
         status = this.status.name,
         applicantName = this.applicant.name,
         attendantName = this.attendant?.name,
-        response = this.response
+        response = this.response,
+        attachments = this.attachments?.map {
+            AttachmentResponse(
+                name = it.name,
+                data = Base64Utils.encodeToString(it.fileData)
+            )
+        }
     )
 }
 

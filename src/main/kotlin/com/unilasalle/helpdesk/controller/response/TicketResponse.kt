@@ -17,5 +17,6 @@ data class TicketResponse(
     val updatedAt: LocalDateTime,
     val category: String,
     val status: String,
-    val response: String? = null
+    val response: String? = null,
+    val attachments: List<AttachmentResponse>? = null
 )
