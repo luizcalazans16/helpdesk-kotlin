@@ -3,7 +3,6 @@ val kotlinLoggingVersion = "2.0.4"
 val mockkVersion = "1.12.4"
 val kotlinTestVersion = "1.6.0"
 
-
 plugins {
     id("org.springframework.boot") version "2.6.8"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
@@ -33,7 +32,6 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt:0.9.1")
     implementation("org.apache.logging.log4j:log4j-bom:$log4jVersion")
     implementation("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")
-
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("org.postgresql:postgresql")
